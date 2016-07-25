@@ -44,7 +44,7 @@ var pokemon_sprites = {
         icon_height: 30,
         sprite_width: 360,
         sprite_height: 390,
-        filename: 'static/icons-sprite.png',
+        filename: 'static/images/icons-sprite.png',
         name: 'Normal'
     },
     highres: {
@@ -53,7 +53,7 @@ var pokemon_sprites = {
         icon_height: 65,
         sprite_width: 455,
         sprite_height: 1430,
-        filename: 'static/icons-large-sprite.png',
+        filename: 'static/images/icons-large-sprite.png',
         name: 'High-Res'
     }
 };
@@ -525,7 +525,7 @@ function setupPokemonMarker(item, skipNotification) {
             if (Store.get('playSound')) {
               audio.play();
             }
-            sendNotification('A wild ' + item.pokemon_name + ' appeared!', 'Click to load map', 'static/icons/' + item.pokemon_id + '.png', item.latitude, item.longitude);
+            sendNotification('A wild ' + item.pokemon_name + ' appeared!', 'Click to load map', 'static/icons/' + item.pokemon_id + '.png', 'static/sounds/' + item.pokemon_id + '.mp3', item.latitude, item.longitude);
         }
         // Icons still get a bounce, even on redraw
         marker.setAnimation(google.maps.Animation.BOUNCE);
@@ -900,7 +900,7 @@ function getPointDistance(pointA, pointB) {
     return google.maps.geometry.spherical.computeDistanceBetween(pointA, pointB);
 }
 
-function sendNotification(title, text, icon, lat, lng) {
+function sendNotification(title, text, icon, cry, lat, lng) {
     if (!("Notification" in window)) {
         return false; // Notifications are not present in browser
     }
@@ -910,7 +910,7 @@ function sendNotification(title, text, icon, lat, lng) {
         var notification = new Notification(title, {
             icon: icon,
             body: text,
-            sound: 'sounds/ding.mp3'
+            sound: cry
         });
 
         notification.onclick = function () {
@@ -943,7 +943,7 @@ function myLocationButton(map, marker) {
     locationIcon.style.margin = '5px';
     locationIcon.style.width = '18px';
     locationIcon.style.height = '18px';
-    locationIcon.style.backgroundImage = 'url(static/mylocation-sprite-1x.png)';
+    locationIcon.style.backgroundImage = 'url(static/images/mylocation-sprite-1x.png)';
     locationIcon.style.backgroundSize = '180px 18px';
     locationIcon.style.backgroundPosition = '0px 0px';
     locationIcon.style.backgroundRepeat = 'no-repeat';
